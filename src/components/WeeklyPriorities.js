@@ -10,7 +10,7 @@ const WeeklyPriorities = ({ priorities, setPriorities, tasks, setTasks, backlogT
   //const [viewMode, setViewMode] = useState('today');
 
   const today = new Date().toISOString().split('T')[0];
-  console.log('date is:', today);
+  //console.log('date is:', today);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -288,7 +288,7 @@ const WeeklyPriorities = ({ priorities, setPriorities, tasks, setTasks, backlogT
     } else if (viewMode === 'today') {
       // Handle reordering in today's tasks
       if (source.droppableId !== destination.droppableId) {
-        console.log('Attempted to move task between priorities. This is not allowed.');
+        //console.log('Attempted to move task between priorities. This is not allowed.');
         return;
       }
   
