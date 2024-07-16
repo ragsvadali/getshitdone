@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background text-text font-sans;
+}
+
+.card {
+  @apply bg-surface rounded-lg shadow-card p-4;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-md text-white bg-primary hover:bg-blue-700 transition-colors duration-200;
+}
+
+.input {
+  @apply w-full px-3 py-2 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary;
+}
+
+/* Add these new utility classes to your existing index.css */
+
+.btn-icon {
+  @apply p-2 rounded-full hover:bg-gray-100 transition-colors duration-200;
+}
+
+/* You might want to adjust the following styles based on your color scheme */
+.status-done { @apply bg-green-100 text-green-800; }
+.status-defer { @apply bg-yellow-100 text-yellow-800; }
+.status-delete { @apply bg-red-100 text-red-800; }
+.status-pending { @apply bg-blue-100 text-blue-800; }
+
+.priority-top { @apply bg-blue-100 text-blue-800; }
+.priority-secondary { @apply bg-indigo-100 text-indigo-800; }
+.priority-unaligned { @apply bg-gray-100 text-gray-800; }
