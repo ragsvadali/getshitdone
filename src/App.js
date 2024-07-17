@@ -63,7 +63,7 @@ const App = () => {
     }));
   };
 
-
+  // NEW: adding code to handle duplicated moved tasks
   const handleDailyRollover = useCallback(() => {
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
@@ -73,6 +73,11 @@ const App = () => {
     setTasks(prevTasks => {
       const newTasks = { ...prevTasks };
       const yesterdayTasks = newTasks[yesterdayString] || [];
+
+      // Keep completed tasks for yesterday
+      newTasks[yesterdayString] = yesterdayTasks.filter(task => task.status === 'done');
+
+      // Move unfinished tasks to today
       const unfinishedTasks = yesterdayTasks.filter(task => task.status !== 'done');
 
       if (unfinishedTasks.length > 0) {
@@ -81,6 +86,15 @@ const App = () => {
           ...unfinishedTasks.map(task => ({ ...task, date: todayString }))
         ];
       }
+
+      /* TO TRY:
+          // Remove empty days
+    Object.keys(newTasks).forEach(date => {
+      if (newTasks[date].length === 0) {
+        delete newTasks[date];
+      }
+    }); */
+
 
       // NEW > removed this line to preserve yesterday's tasks
       // delete newTasks[yesterdayString];
