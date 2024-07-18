@@ -100,7 +100,7 @@ const App = () => {
       // delete newTasks[yesterdayString];
 
       // TO TRY NEXT -Keep completed tasks in their original date, if prev change didn't fix
-      //newTasks[yesterdayString] = yesterdayTasks.filter(task => task.status === 'done');
+      newTasks[yesterdayString] = yesterdayTasks.filter(task => task.status === 'done');
 
       return newTasks;
     });
