@@ -97,88 +97,6 @@ const WeeklyPriorities = ({ priorities, setPriorities, tasks, setTasks, backlogT
     }
   };
 
-
-  /* PREV- Adding grippable elements back to Backlog view
-  const renderBacklogTasks = () => {
-    return (
-      <>
-        <Droppable droppableId="backlog">
-          {(provided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              {backlogTasks.map((task, index) => (
-                <Draggable key={task.id} draggableId={task.id} index={index}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      className={`flex items-center bg-white p-3 mb-2 rounded shadow ${
-                        snapshot.isDragging ? 'bg-gray-100' : ''
-                      }`}
-                    >
-                      <div {...provided.dragHandleProps} className="mr-2 cursor-move">
-                        <GripVertical className="w-4 h-4 text-gray-400" />
-                      </div>
-                      <span className="flex-grow">{task.title}</span>
-                      <div className="flex items-center">
-                        <select
-                          onChange={(e) => {
-                            addTaskToToday(task, e.target.value);
-                            setBacklogTasks(prevTasks => prevTasks.filter(t => t.id !== task.id));
-                          }}
-                          className="mr-2 p-1 border rounded"
-                        >
-                          <option value="">Schedule to...</option>
-                          {priorities.map((priority) => (
-                            <option key={priority.id} value={priority.id}>
-                              {priority.title || `Priority ${priority.id}`}
-                            </option>
-                          ))}
-                        </select>
-                        <button
-                          onClick={() => setBacklogTasks(prevTasks => prevTasks.filter(t => t.id !== task.id))}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          <Trash2 className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-        {addingTaskForPriority === 'backlog' ? (
-          <div className="flex items-center mt-2">
-            <input
-              type="text"
-              placeholder="New task title"
-              value={newTaskTitle}
-              onChange={(e) => setNewTaskTitle(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleAddBacklogTask()}
-              className="flex-grow text-sm p-1 border rounded mr-2"
-              autoFocus
-            />
-            <button onClick={handleAddBacklogTask} className="text-green-500 hover:text-green-700">
-              <Plus className="w-5 h-5" />
-            </button>
-            <button onClick={() => setAddingTaskForPriority(null)} className="text-red-500 hover:text-red-700 ml-2">
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-        ) : (
-          <button 
-            onClick={() => setAddingTaskForPriority('backlog')} 
-            className="text-sm text-blue-500 hover:text-blue-700 mt-2 flex items-center"
-          >
-            <Plus className="w-4 h-4 mr-1" /> Add task
-          </button>
-        )}
-      </>
-    );
-  }; */
-
   // NEW version to add an always available text input box
   // Changed elements of className for button: to bg-white, text-green, hover:bg-green-400
   // Removed focus:ring-2 fron className for input
@@ -224,24 +142,24 @@ const WeeklyPriorities = ({ priorities, setPriorities, tasks, setTasks, backlogT
                     <div
                       ref={provided.innerRef}
                       {...provided.draggableProps}
-                      className={`flex items-center bg-white p-3 mb-2 rounded shadow ${
+                      className={`flex items-center bg-white p-2.5 mb-1.5 rounded shadow-sm ${
                         snapshot.isDragging ? 'bg-gray-100' : ''
                       }`}
                     >
                       <div {...provided.dragHandleProps} className="mr-2 cursor-move">
                         <GripVertical className="w-4 h-4 text-gray-400" />
                       </div>
-                      <span className="flex-grow">{task.title}</span>
+                      <span className="flex-grow text-sm">{task.title}</span>
                       <div className="flex items-center">
                         <select
                           onChange={(e) => {
                             addTaskToToday(task, e.target.value);
                             setBacklogTasks(prevTasks => prevTasks.filter(t => t.id !== task.id));
                           }}
-                          className="mr-2 p-1 text-gray-500 text-sm text-right rounded"
+                          className="mr-2 p-1 text-gray-500 text-xs text-right rounded"
                           defaultValue=""
                         >
-                          <option value="" disabled>Move
+                          <option value="" disabled>Do
                             </option>
                           {priorities.map((priority) => (
                             <option key={priority.id} value={priority.id}>
@@ -253,7 +171,7 @@ const WeeklyPriorities = ({ priorities, setPriorities, tasks, setTasks, backlogT
                           onClick={() => setBacklogTasks(prevTasks => prevTasks.filter(t => t.id !== task.id))}
                           className="text-red-500 hover:text-red-700"
                         >
-                          <Trash2 className="w-5 h-5" />
+                          <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
                     </div>

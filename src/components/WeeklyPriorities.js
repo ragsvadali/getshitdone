@@ -331,25 +331,25 @@ const WeeklyPriorities = ({ priorities, setPriorities, tasks, setTasks, backlogT
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="max-w-4xl mx-auto p-4">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold">
+        <div className="flex flex-col sm:flex-row justify-between items-center sm:items-center mb-6 space-y-2 sm:space-y-0">
+          <h1 className="text-xl sm:text-2xl font-semibold">
             Get Shit Done /  <span className="text-xl font-light text-gray-400">{formatDate(today)}</span>
           </h1>
-          <div className="flex items-center bg-gray-200 rounded-full">
+          <div className="flex items-center bg-gray-200 rounded-full text-sm">
             <button
-              className={`px-4 py-2 rounded-full text-sm font-medium ${viewMode === 'today' ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
+              className={`px-3 py-1 rounded-full text-sm font-medium ${viewMode === 'today' ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
               onClick={() => setViewMode('today')}
             >
               Today
             </button>
             <button
-              className={`px-4 py-2 rounded-full text-sm font-medium ${viewMode === 'week' ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
+              className={`px-3 py-1 rounded-full text-sm font-medium ${viewMode === 'week' ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
               onClick={() => setViewMode('week')}
             >
               Week
             </button>
             <button
-              className={`px-4 py-2 rounded-full text-sm font-medium ${viewMode === 'backlog' ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
+              className={`px-3 py-1 rounded-full text-sm font-medium ${viewMode === 'backlog' ? 'bg-blue-500 text-white' : 'text-gray-700'}`}
               onClick={() => setViewMode('backlog')}
             >
               Backlog
