@@ -306,9 +306,17 @@ const WeeklyPriorities = ({ priorities, setPriorities, tasks, setTasks, backlogT
   
   const renderWeekView = (priority) => {
     const startOfWeek = new Date(today);
-    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+    // getDay() is 0 for sunday, so adjusting to make sure my week starts on a monday
+    if (startOfWeek.getDay() === 0) 
+      startOfWeek.setDate(startOfWeek.getDate() - 6);
+    else
+      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+  
     const endOfWeek = new Date(startOfWeek);
     endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+    //console.log("Set start of week as - ", startOfWeek.getDate());
+    //console.log("Set end of week as: - ", endOfWeek.getDate());
   
     const weekTasks = Object.entries(tasks)
       .filter(([date]) => {
