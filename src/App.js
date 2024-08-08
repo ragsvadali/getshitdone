@@ -106,46 +106,18 @@ const App = () => {
     });
   }, []);
 
-  /* OLD - replace this version of weekly rollover with a simpler one that moves incomplete tasks into the backlog
-  const handleWeeklyRollover = useCallback(() => {
-    // Archive the current week
-    const lastWeekEnd = new Date();
-    lastWeekEnd.setDate(lastWeekEnd.getDate() - lastWeekEnd.getDay());
-    const lastWeekStart = new Date(lastWeekEnd);
-    lastWeekStart.setDate(lastWeekStart.getDate() - 6);
-
-    const weekTasks = Object.entries(tasks)
-      .filter(([date]) => {
-        const taskDate = new Date(date);
-        return taskDate >= lastWeekStart && taskDate <= lastWeekEnd;
-      })
-      .reduce((acc, [date, dateTasks]) => {
-        acc[date] = dateTasks;
-        return acc;
-      }, {});
-
-    const weekArchive = {
-      startDate: lastWeekStart.toISOString().split('T')[0],
-      endDate: lastWeekEnd.toISOString().split('T')[0],
-      priorities: priorities,
-      tasks: weekTasks
-    };
-
-    setWeeklyArchive(prevArchive => [...prevArchive, weekArchive]);
-
-    // Clear tasks and reset priorities for the new week
-    setTasks({});
-    setPriorities(priorities.map(priority => ({ ...priority, title: '', outcome: '' })));
-  }, [tasks, priorities, setWeeklyArchive, setPriorities]);
-  */
-
   // NEW - 
   const handleWeeklyRollover = useCallback(() => {
+
+    // this was being computed on a SUN - SAT WEEK. Changed to make it Mon-Sun
     const today = new Date();
     const startOfLastWeek = new Date(today);
-    startOfLastWeek.setDate(today.getDate() - today.getDay() - 7);
+    //startOfLastWeek.setDate(today.getDate() - today.getDay() - 7);
+    startOfLastWeek.setDate(today.getDate() - 7);
     const endOfLastWeek = new Date(today);
-    endOfLastWeek.setDate(today.getDate() - today.getDay() - 1);
+    //Only tasks from today need to be evalauted, so seting end of week as today
+    endOfLastWeek.setDate(today.getDate());
+    
 
     setTasks(prevTasks => {
       const newBacklogTasks = [];
@@ -154,6 +126,7 @@ const App = () => {
       // Process tasks from the previous week
       Object.entries(prevTasks).forEach(([date, dateTasks]) => {
         const taskDate = new Date(date);
+
         if (taskDate >= startOfLastWeek && taskDate <= endOfLastWeek) {
           dateTasks.forEach(task => {
             if (task.status !== 'done') {
@@ -192,7 +165,8 @@ const App = () => {
           // It's a new day, perform daily rollover
           handleDailyRollover();
   
-          // Check if it's also Monday (new week)
+          // Check if it's also Monday (new week) getDay() === 1
+          // TEST: Trigger this on Weds to test that changes worked. 
           if (now.getDay() === 1) {
             handleWeeklyRollover();
           }
